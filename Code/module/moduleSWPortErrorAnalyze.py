@@ -78,8 +78,10 @@ def SWPortErrorAnalyze():
         print('\n' + '{} Error Picked: \n'.format(strPortErrorFileName))
         #tx     rx    encout   discc3   linkfail   losssync   losssig
         objPorterrResult.write(
-            'PortID' + '\t\t' + 'FramTX' + '\t\t' + 'FramRX' + '\t\t' + 'encout' + '\t\t' + 'Discc3' + '\t\t' + 'LinkFL' + '\t\t' + 'LossSC' + '\t\t' + 'LossSG' + '\n')
-        print('PortID' + '\t\t' + 'FramTX' + '\t\t' + 'FramRX' + '\t\t' + 'encout' + '\t\t' + 'Discc3' + '\t\t' + 'LinkFL' + '\t\t' + 'LossSC' + '\t\t' + 'LossSG' + '\n')
+            'PortID'.center(8) + 'FramTX'.center(8) + 'FramRX'.center(8) + 'encout'.center(8) + 'Discc3'.center(8) + 'LinkFL'.center(8) + 'LossSC'.center(8) + 'LossSG' + '\n')
+        print('PortID'.center(8) + 'FramTX'.center(8) + 'FramRX'.center(8) + 'encout'.center(8) + 'Discc3'.center(8) + 'LinkFL'.center(8) + 'LossSC'.center(8) + 'LossSG')
+        
+
         if '3.6' in sys.version.split(' ')[0]:
             lstPortErrLines = codecs.open(strPortErrorFileName).readlines()
         elif '3.4' in sys.version.split(' ')[0]:
@@ -89,13 +91,12 @@ def SWPortErrorAnalyze():
 
         for intPortNum in lstSWPorts[indexEngineIP]:
             lstErrInfo = findDataAndErr(intPortNum, lstPortErrLines)
-            objPorterrResult.write('{}\t\t'.format(str(intPortNum)))
-            print('{}'.format(str(intPortNum)), end='\t\t')
+            objPorterrResult.write(str(intPortNum).center(8))
+            print(str(intPortNum).center(8), end='')
             for strErrorCount in lstErrInfo:
-                objPorterrResult.write(
-                    '{}\t\t'.format(strErrorCount))
-                print('{}'.format(strErrorCount), end='\t\t')
+                objPorterrResult.write(strErrorCount.center(8))
+                print(strErrorCount.center(8), end='')
             objPorterrResult.write('\n')
-            print('\n')
+            print('')
     objPorterrResult.close()
     os.chdir('../../../')
