@@ -4,7 +4,7 @@ from module import moduleConfigTimeNow
 from module import moduleTraceAnalyse
 from module import moduleGetTrace
 from module import moduleSWPortErrorAnalyze
-from module import moduleClean
+from module import moduleOldFileClean
 
 import configparser
 import os
@@ -44,7 +44,7 @@ import os
 
 def main():
 
-    moduleClean.Clean()
+    moduleOldFileClean.Clean()
     moduleGetTrace.GetTrace()
     moduleTraceAnalyse.TraceAnalyze()
     moduleSWPortErrorAnalyze.SWPortErrorAnalyze()
