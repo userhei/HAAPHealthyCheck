@@ -1,12 +1,7 @@
 from __future__ import print_function
 import os
-import time
-import shutil
-import codecs
-import re
 import sys
 import configparser
-import collections
 from collections import OrderedDict
 import module
 from module.source import classSSH
