@@ -25,8 +25,6 @@ for i in objReadConfig.items('SWPorts'):
 lstSANSwitchIPs = list(oddSWPort.keys())
 lstSWPorts = list(oddSWPort.values())
 
-# print('switch {}'.format(lstSANSwitchIPs))
-# print('port {}'.format(lstSWPorts))
 
 def ClearPortError():
 
@@ -34,8 +32,8 @@ def ClearPortError():
         try:
             objConnectToSANSwitch = classSSH.SSHConnection(
                 lstSANSwitchIPs[indexEngineIP], 22, strSWUserName, strSWPasswd)
-            # for strPortNum in lstSWPorts[indexEngineIP]:
-            #     objConnectToSANSwitch.exec_command('statsclear {}'.format(str(strPortNum)))
+            for strPortNum in lstSWPorts[indexEngineIP]:
+                objConnectToSANSwitch.exec_command('statsclear {}'.format(str(strPortNum)))
         except Exception as E:
             print('Connect to SAN Switch {} Failed ...'.format(lstSANSwitchIPs[indexEngineIP]))
             continue
