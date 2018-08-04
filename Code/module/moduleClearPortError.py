@@ -13,7 +13,7 @@ objReadConfig.read('Conf.ini')
 strSWUserName = objReadConfig.get('SWSetting', 'username')
 strSWPasswd = objReadConfig.get('SWSetting', 'password')
 
-oddSWPort = collections.OrderedDict()
+oddSWPort = OrderedDict()
 for i in objReadConfig.items('SWPorts'):
     oddSWPort[i[0]] = eval(i[1])
 

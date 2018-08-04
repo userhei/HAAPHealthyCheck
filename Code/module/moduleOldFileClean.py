@@ -11,6 +11,7 @@ objReadConfig = configparser.ConfigParser(allow_no_value = True)
 objReadConfig.read('Conf.ini')
 
 strFolderName = objReadConfig.get('FolderSetting','collectionfolder')
+fltZipRetain = float(objReadConfig.get('RetainSetting','zipfileretain'))
 fltFileRetain = float(objReadConfig.get('RetainSetting','resultfileretain'))
 fltFolderRetain = float(objReadConfig.get('RetainSetting','collectfolderretain'))
 
@@ -21,7 +22,10 @@ def functionClean(strFName):        #Fname : File or Folder Name
     fltDeltaDays = (fltNowTimeStamp - fltFileCreateTimeStamp)/60/60/24
 
     try:
-        if os.path.isfile(strFName) and fltDeltaDays >= fltFileRetain:
+        if strFName.endswith('.log') and fltDeltaDays >= fltFileRetain:
+            os.remove(strFName)
+            return('Delete File: {} '.format(strFName))
+        elif strFName.endswith('.zip') and fltDeltaDays >= fltZipRetain:
             os.remove(strFName)
             return('Delete File: {} '.format(strFName))
         elif os.path.isdir(strFName) and fltDeltaDays >= fltFolderRetain:
