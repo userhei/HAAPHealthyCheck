@@ -29,6 +29,7 @@ lstSANSwitchIPs = list(oddSWPort.keys())
 lstSWPorts = list(oddSWPort.values())
 
 strSWPortErrorFolder = objReadConfig.get('FolderSetting','porterrfolder')
+strTimeNowFromConf = objReadConfig.get('GlobalSetting','TimeNow')
 
 
 def boolPortinLine(intPort, strLine):
@@ -49,13 +50,23 @@ def findDataAndErr(intPortNum, lstPortErrLines):
 
 
 def SWPortErrorAnalyze():
+
+    strWorkDir = '{}/collection_{}'.format(objReadConfig.get('FolderSetting','collectionfolder'),\
+        strTimeNowFromConf)
+    try:
+        os.makedirs(strWorkDir)
+    except WindowsError as E:
+        pass
+
+    os.chdir(strWorkDir)
+
     try:
         os.mkdir(strSWPortErrorFolder)
     except  FileExistsError as E:
         pass
     os.chdir(strSWPortErrorFolder)
 
-    objPorterrResult = open('../../collection_{}_Result.log'.format(objReadConfig.get('GlobalSetting','TimeNow')), 'a')
+    objPorterrResult = open('../../collection_{}_Result.log'.format(strTimeNowFromConf), 'a')
 
     for indexEngineIP in range(len(lstSANSwitchIPs)):
         strPortErrorFileName = 'SW_porterrshow_{}.log'.format(

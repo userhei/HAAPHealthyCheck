@@ -13,9 +13,10 @@ import os
 import sys
 
 strHelp = '''
-        -run        : Run Normally
-        -statsclear : Clear PortError Counter on the SAN Switch
-        -zipall 	: Zip All Collections and Result File
+        -run            : Run Normally
+        -porterrshow    : Run, but Collect PortError only
+        -statsclear     : Clear PortError Counter on the SAN Switch
+        -zipall         : Zip All Collections and Result File
         '''
 
 def main():
@@ -26,6 +27,11 @@ def main():
         moduleOldFileClean.Clean()
         moduleGetTrace.GetTrace()
         moduleTraceAnalyse.TraceAnalyze()
+        moduleSWPortErrorAnalyze.SWPortErrorAnalyze()
+        moduleZipCollections.ZipCollections()
+
+    elif sys.argv[1] == '-porterrshow':
+        moduleOldFileClean.Clean()
         moduleSWPortErrorAnalyze.SWPortErrorAnalyze()
         moduleZipCollections.ZipCollections()
 
