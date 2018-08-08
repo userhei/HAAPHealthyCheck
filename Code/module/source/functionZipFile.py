@@ -20,7 +20,7 @@ def ZipFilesOrDirs(strZipFileName,*lstFName):
     objZipFileWrite.close()
 
 
-def CheckZipFileAndDelete(strZipFileName,*lstFName):
+def CheckZipFileAndDelete(strZipFileName):
     objZipFileRead = zipfile.ZipFile(strZipFileName, 'r')
     if objZipFileRead.testzip() == None:
         print('Zip File {} Test OK, Now Delete All Source File And Folder...'.format(strZipFileName))

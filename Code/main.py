@@ -7,6 +7,7 @@ from module import moduleSWPortErrorAnalyze
 from module import moduleOldFileClean
 from module import moduleClearPortError
 from module import moduleZipCollections
+from module import modulePeriodicCheck
 
 import configparser
 import os
@@ -16,13 +17,15 @@ strHelp = '''
         -run            : Run Normally
         -porterrshow    : Run, but Collect PortError only
         -statsclear     : Clear PortError Counter on the SAN Switch
-        -zipall         : Zip All Collections and Result File
+        -zipall         : Zip All non-Zip File
+        -check          : Run Periodic Check
         '''
 
 def main():
 
-    if len(sys.argv) == 1:
+    if len(sys.argv) == 1 or len(sys.argv) > 2:
         print(strHelp)
+        
     elif sys.argv[1] == '-run':
         moduleOldFileClean.Clean()
         moduleGetTrace.GetTrace()
@@ -40,6 +43,9 @@ def main():
 
     elif sys.argv[1] == '-zipall':
     	moduleZipCollections.ZipAll()
+
+    elif sys.argv[1] == '-check':
+        modulePeriodicCheck.main()
 
     else:
         print(strHelp)
